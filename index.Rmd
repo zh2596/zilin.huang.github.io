@@ -1,0 +1,44 @@
+---
+title: "My awesome website"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    theme: cerulean
+---
+
+A git of demo
+
+![](https://media.giphy.com/media/drXGoW1iudhKw/giphy.gif)
+
+You can add text 
+
+* and lists 
+* with extra bullets
+
+You can *format* and **bold**
+
+Also still use R.
+
+```{r}
+library(tidyverse)
+
+plot_df =
+  tibble(
+    x=runif(100),
+    y=1+2*x+rnorm(100)
+  )
+
+plot_df |>
+  ggplot(aes(x=x,y=y))+
+  geom_point()
+```
+ 
+This is a [link](https://p8105.com/making_websites.html) to a good tool. Here's a link to the [about](about.html) page
+
+My cat is ted:
+
+![](images/ted.jpg)
+
+Backstage
+
