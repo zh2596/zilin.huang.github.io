@@ -20,11 +20,11 @@ First of all, I intentionally filter out a subset of the original dataset to ens
 ```{r, warning=FALSE}
 instacart =
   instacart |>
-  select(reordered, order_dow, order_hour_of_day, product_name, aisle, department) |>
+  select(reordered, order_dow, order_hour_of_day, product_name, aisle, department, days_since_prior_order) |>
   filter(department %in% c("dairy eggs", "produce", "canned goods", "beverages", "deli"))
 ```
 
-Column {data-width=650}
+Column {data-width=400}
 -----------------------------------------------------------------------
 
 ### Chart A
@@ -40,12 +40,12 @@ instacart |>
   plot_ly(x = ~department, y = ~sum_of_reordered_goods, type = "bar")
 ```
 
-Column {data-width=350}
+Column {data-width=600}
 -----------------------------------------------------------------------
 
-The second plot is a pie chart that shows the percentage of Date of Week (from Monday to Sunday, denoted as 0-6 in order) of the goods in ordered in specific departments.
-
 ### Chart B
+
+The second plot is a pie chart that shows the percentage of Date of Week (from Monday to Sunday, denoted as 0-6 in order) of the goods in ordered in specific departments.
 
 ```{r}
 instacart_pie = count(instacart, order_dow)
@@ -53,7 +53,11 @@ instacart_pie = count(instacart, order_dow)
 plot_ly(data=instacart_pie, values = ~n, labels = ~factor(order_dow), type = "pie") %>% layout(title="Date of Week Percentage of Specific Deparments' Ordered Goods")
 ```
 
-The third plot is a 
-
 ### Chart C
 
+The third plot is a boxplot that shows the distribution of order hour of a particular weekday for all ordered goods in the dataset. 
+
+```{r}
+instacart |>
+  plot_ly(x = ~order_dow, y = ~order_hour_of_day, type = "box")
+``` 
