@@ -1,0 +1,59 @@
+---
+title: "Dashboard For Problem 2"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+library(tidyverse)
+library(plotly)
+library(p8105.datasets)
+
+data("instacart")
+```
+
+First of all, I intentionally filter out a subset of the original dataset to ensure a reasonable product of plots, which would not be crashed due to extremely large numbers.
+
+```{r, warning=FALSE}
+instacart =
+  instacart |>
+  select(reordered, order_dow, order_hour_of_day, product_name, aisle, department) |>
+  filter(department %in% c("dairy eggs", "produce", "canned goods", "beverages", "deli"))
+```
+
+Column {data-width=650}
+-----------------------------------------------------------------------
+
+### Chart A
+
+This is a dashboard containing three plots of the dataset `instacart`.
+
+The first plot is a bar plot that summarizes the total number of reordered goods for each department.
+
+```{r}
+instacart |>
+  group_by(department) |>
+  summarize(sum_of_reordered_goods = sum(reordered)) |>
+  plot_ly(x = ~department, y = ~sum_of_reordered_goods, type = "bar")
+```
+
+Column {data-width=350}
+-----------------------------------------------------------------------
+
+The second plot is a pie chart that shows the percentage of Date of Week (from Monday to Sunday, denoted as 0-6 in order) of the goods in ordered in specific departments.
+
+### Chart B
+
+```{r}
+instacart_pie = count(instacart, order_dow)
+
+plot_ly(data=instacart_pie, values = ~n, labels = ~factor(order_dow), type = "pie") %>% layout(title="Date of Week Percentage of Specific Deparments' Ordered Goods")
+```
+
+The third plot is a 
+
+### Chart C
+

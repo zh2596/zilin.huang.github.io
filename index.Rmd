@@ -4,41 +4,14 @@ output:
   html_document:
     toc: true
     toc_float: true
-    theme: cerulean
 ---
 
-A git of demo
+Hello everyone. This is a website page for Homework 4 of the P8105 class on Fall 2023.
 
-![](https://media.giphy.com/media/drXGoW1iudhKw/giphy.gif)
+My name is Zilin Huang and I am a first-year graduate student majoring in Biostatistics at Columbia University. I have a strong interest in applying statistical and computational skills to the field of public health, and I would like to seek internship/full-time jobs as a statistical programmer/analyst in this field after graduation.
 
-You can add text 
+Here is the logo of our campus:
 
-* and lists 
-* with extra bullets
+<img src="images/image.jpg" style="width:75%">
 
-You can *format* and **bold**
-
-Also still use R.
-
-```{r}
-library(tidyverse)
-
-plot_df =
-  tibble(
-    x=runif(100),
-    y=1+2*x+rnorm(100)
-  )
-
-plot_df |>
-  ggplot(aes(x=x,y=y))+
-  geom_point()
-```
- 
-This is a [link](https://p8105.com/making_websites.html) to a good tool. Here's a link to the [about](about.html) page
-
-My cat is ted:
-
-![](images/ted.jpg)
-
-Backstage
-
+Here's a link to the [About Me](About_Me.html) page.

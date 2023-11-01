@@ -9,16 +9,14 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
-<meta name="author" content="Zilin Huang" />
 
-<meta name="date" content="2023-10-19" />
 
-<title>about</title>
+<title>Dashboard For Problem 2</title>
 
 <script src="site_libs/header-attrs-2.24/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link href="site_libs/bootstrap-3.3.5/css/cerulean.min.css" rel="stylesheet" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
@@ -34,6 +32,13 @@
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="site_libs/htmlwidgets-1.6.2/htmlwidgets.js"></script>
+<script src="site_libs/plotly-binding-4.10.3/plotly.js"></script>
+<script src="site_libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="site_libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
+<script src="site_libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+<link href="site_libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="site_libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
 <link href="site_libs/font-awesome-6.4.2/css/all.min.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet" />
 
@@ -250,20 +255,26 @@ $(document).ready(function () {
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="about.html">About</a>
+  <a href="About_Me.html">About Me</a>
 </li>
 <li>
-  <a href="projects.html">Projects</a>
+  <a href="Dashboard_For_Problem_2.html">Dashboard For Problem 2</a>
 </li>
 <li>
-  <a href="mailto:&lt;you@youremail.com&gt;">
+  <a href="mailto:&lt;zh2596@cumc.columbia.edu&gt;">
     <span class="fa fa-envelope fa-lg"></span>
      
   </a>
 </li>
 <li>
-  <a href="http://github.com/&lt;YOUR_GH_NAME&gt;/">
+  <a href="http://github.com/zh2596/">
     <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="https://www.linkedin.com/in/zilinhuangmasterinbiostats/">
+    <span class="fa fa-linkedin fa-lg"></span>
      
   </a>
 </li>
@@ -276,14 +287,52 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">about</h1>
-<h4 class="author">Zilin Huang</h4>
-<h4 class="date">2023-10-19</h4>
+<h1 class="title toc-ignore">Dashboard For Problem 2</h1>
 
 </div>
 
 
-<p>About</p>
+<p>First of all, I intentionally filter out a subset of the original
+dataset to ensure a reasonable product of plots, which would not be
+crashed due to extremely large numbers.</p>
+<pre class="r"><code>instacart =
+  instacart |&gt;
+  select(reordered, order_dow, order_hour_of_day, product_name, aisle, department) |&gt;
+  filter(department %in% c(&quot;dairy eggs&quot;, &quot;produce&quot;, &quot;canned goods&quot;, &quot;beverages&quot;, &quot;deli&quot;))</code></pre>
+<div id="column" class="section level2" data-width="650">
+<h2>Column</h2>
+<div id="chart-a" class="section level3">
+<h3>Chart A</h3>
+<p>This is a dashboard containing three plots of the dataset
+<code>instacart</code>.</p>
+<p>The first plot is a bar plot that summarizes the total number of
+reordered goods for each department.</p>
+<pre class="r"><code>instacart |&gt;
+  group_by(department) |&gt;
+  summarize(sum_of_reordered_goods = sum(reordered)) |&gt;
+  plot_ly(x = ~department, y = ~sum_of_reordered_goods, type = &quot;bar&quot;)</code></pre>
+<div class="plotly html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-bac805b480c46862ac59" style="width:672px;height:480px;"></div>
+<script type="application/json" data-for="htmlwidget-bac805b480c46862ac59">{"x":{"visdat":{"3a60600647ea":["function () ","plotlyVisDat"]},"cur_data":"3a60600647ea","attrs":{"3a60600647ea":{"x":{},"y":{},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"bar"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"xaxis":{"domain":[0,1],"automargin":true,"title":"department","type":"category","categoryorder":"array","categoryarray":["beverages","canned goods","dairy eggs","deli","produce"]},"yaxis":{"domain":[0,1],"automargin":true,"title":"sum_of_reordered_goods"},"hovermode":"closest","showlegend":false},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":["beverages","canned goods","dairy eggs","deli","produce"],"y":[75060,22782,146502,27367,271886],"type":"bar","marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(31,119,180,1)"}},"error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<div id="column-1" class="section level2" data-width="350">
+<h2>Column</h2>
+<p>The second plot is a pie chart that shows the percentage of Date of
+Week (from Monday to Sunday, denoted as 0-6 in order) of the goods in
+ordered in specific departments.</p>
+<div id="chart-b" class="section level3">
+<h3>Chart B</h3>
+<pre class="r"><code>instacart_pie = count(instacart, order_dow)
+
+plot_ly(data=instacart_pie, values = ~n, labels = ~factor(order_dow), type = &quot;pie&quot;) %&gt;% layout(title=&quot;Date of Week Percentage of Specific Deparments&#39; Ordered Goods&quot;)</code></pre>
+<div class="plotly html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-7945c189e902fc10cb9e" style="width:672px;height:480px;"></div>
+<script type="application/json" data-for="htmlwidget-7945c189e902fc10cb9e">{"x":{"visdat":{"3a6035bd4726":["function () ","plotlyVisDat"]},"cur_data":"3a6035bd4726","attrs":{"3a6035bd4726":{"values":{},"labels":{},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"pie"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"title":"Date of Week Percentage of Specific Deparments' Ordered Goods","hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"values":[199647,125332,95351,90460,91904,104857,123723],"labels":["0","1","2","3","4","5","6"],"type":"pie","marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(255,255,255,1)"}},"frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<p>The third plot is a</p>
+</div>
+<div id="chart-c" class="section level3">
+<h3>Chart C</h3>
+</div>
+</div>
 
 
 
